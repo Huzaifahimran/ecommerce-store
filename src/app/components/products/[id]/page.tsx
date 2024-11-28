@@ -1,34 +1,49 @@
-import Image from 'next/image'
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
+'use client'
+import { useRouter } from 'next/router';
+import Image from 'next/image';
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Star, Truck, RefreshCcw } from 'lucide-react'
+} from "@/components/ui/select";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Star, Truck, RefreshCcw } from 'lucide-react';
 
-export default function ProductDetail({ params }: { params: { id: string } }) {
-  // This would typically come from a database or API based on the ID
-  const product = {
-    id: params.id,
+interface Product {
+  id: string;
+  name: string;
+  price: number;
+  description: string;
+  images: string[];
+  sizes: string[];
+  colors: string[];
+}
+
+export default function ProductDetail() {
+  const router = useRouter();
+  const { id } = router.query; // Get the dynamic ID from the URL
+
+  // Simulating product data (replace with your actual data fetching logic)
+  const product: Product = {
+    id: id as string, // Type assertion since id is a string
     name: "Classic White Tee",
     price: 29.99,
     description: "Our classic white tee is a wardrobe essential. Made from 100% organic cotton, it's soft, breathable, and perfect for everyday wear. The versatile design pairs well with any outfit, making it a must-have for any fashion-conscious individual.",
     images: ["/placeholder.svg", "/placeholder.svg", "/placeholder.svg", "/placeholder.svg"],
     sizes: ["XS", "S", "M", "L", "XL"],
     colors: ["White", "Black", "Gray"],
-  }
+  };
 
   return (
     <div className="min-h-screen bg-gray-50">
 
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="flex flex-col md:flex-row gap-8">
-          {/* Product Images */}
+
           <div className="md:w-1/2">
             <div className="aspect-w-1 aspect-h-1 bg-gray-200 rounded-lg overflow-hidden">
               <Image
@@ -54,7 +69,6 @@ export default function ProductDetail({ params }: { params: { id: string } }) {
             </div>
           </div>
 
-          {/* Product Info */}
           <div className="md:w-1/2">
             <h1 className="text-3xl font-bold text-gray-900 mb-4">{product.name}</h1>
             <div className="flex items-center mb-4">
@@ -114,7 +128,6 @@ export default function ProductDetail({ params }: { params: { id: string } }) {
           </div>
         </div>
 
-        {/* Product Details Tabs */}
         <div className="mt-16">
           <Tabs defaultValue="description">
             <TabsList>

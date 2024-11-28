@@ -1,4 +1,5 @@
-import { Home, ShoppingBag, Info, Mail } from 'lucide-react';
+import { Home, ShoppingBag, Info, Mail, UserRound } from 'lucide-react';
+import Link from 'next/link';
 
 export default function Navbar() {
   return (
@@ -8,22 +9,22 @@ export default function Navbar() {
           <span className="text-2xl font-bold text-purple-800">Vestis Aura</span>
         </div>
         <div className="flex items-center space-x-6">
-          <a href="/" className="text-gray-600 hover:text-gray-900 transition-colors">
-            <Home size={24} className='text-purple-800'/>
+          <Link href="/" className="text-gray-600 hover:text-gray-900 transition-colors">
+            <Home size={24} className='text-purple-800' />
             <span className="sr-only">Home</span>
-          </a>
-          <a href="/cart" className="text-gray-600 hover:text-gray-900 transition-colors">
+          </Link>
+          <Link href="/cart" className="text-gray-600 hover:text-gray-900 transition-colors">
             <ShoppingBag size={24} className='text-purple-800' />
             <span className="sr-only">Shop</span>
-          </a>
-          <a href="" className="text-gray-600 hover:text-gray-900 transition-colors">
-            <Info size={24} className='text-purple-800'/>
+          </Link>
+          <Link href="" className="text-gray-600 hover:text-gray-900 transition-colors">
+            <Info size={24} className='text-purple-800' />
             <span className="sr-only">About</span>
-          </a>
-          <a href="#" className="text-gray-600 hover:text-gray-900 transition-colors">
-            <Mail size={24} className='text-purple-800'/>
+          </Link>
+          <Link href="/auth" className="text-gray-600 hover:text-gray-900 transition-colors">
+            <UserRound size={24} className='text-purple-800' />
             <span className="sr-only">Contact</span>
-          </a>
+          </Link>
         </div>
       </nav>
     </header>
