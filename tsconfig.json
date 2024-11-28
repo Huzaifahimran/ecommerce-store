@@ -14,13 +14,16 @@
     "jsx": "preserve",
     "incremental": true,
     "plugins": [
-      {
+      { 
         "name": "next"
       }
     ],
     "paths": {
       "@/*": ["./src/*"]
-    }
+    },
+    "noUnusedLocals": true,          
+    "noUnusedParameters": true,       
+    "strictNullChecks": true          
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
   "exclude": ["node_modules"]
