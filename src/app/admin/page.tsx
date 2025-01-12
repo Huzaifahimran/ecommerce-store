@@ -11,7 +11,6 @@ import { DollarSign, Users, Package, ArrowUpRight, ArrowDownRight, ShoppingCart 
 import Link from 'next/link'
 
 export default function AdminDashboard() {
-  // This would typically come from your database or analytics service
   const stats = [
     {
       title: "Total Revenue",
