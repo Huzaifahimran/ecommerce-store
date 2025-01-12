@@ -1,4 +1,4 @@
-import { Home, ShoppingBag, Info, Mail, UserRound } from 'lucide-react';
+import { Home, ShoppingBag, Info, UserRound } from 'lucide-react';
 import Link from 'next/link';
 
 export default function Navbar() {

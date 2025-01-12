@@ -1,147 +1,263 @@
-'use client'
-import Image from 'next/image'
-import { Input } from "@/components/ui/input"
-import { Button } from "@/components/ui/button"
-import { ShoppingBag, Info, Mail, Instagram, Twitter, Facebook } from 'lucide-react'
-import { useRouter } from 'next/navigation'
+"use client";
+import Image from "next/image";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import {
+  ShoppingBag,
+  Info,
+  Mail,
+  Instagram,
+  Twitter,
+  Facebook,
+} from "lucide-react";
+import { useRouter } from "next/navigation";
+import { motion } from "framer-motion";
+
+const products = [
+  {
+    id: 1,
+    name: "MAXI-LONG COAT",
+    price: "RS.14,450",
+    image: "/images/cargo_trousers.jpg",
+    colors: ["#000000"],
+    soldOut: true,
+  },
+  {
+    id: 2,
+    name: "SATIN SKIRT",
+    price: "RS.4,250",
+    image: "/images/dress2.jpg",
+    colors: ["#9B4444", "#808080"],
+  },
+  {
+    id: 3,
+    name: "RELAX SHIRT WITH POCKETS",
+    price: "RS.3,050",
+    image: "/images/dress1.jpg",
+    colors: ["#90A955"],
+  },
+  {
+    id: 4,
+    name: "MOCK NECK RELAX SWEATER",
+    price: "RS.7,950",
+    image: "/images/khaddar_shirt.jpg",
+    colors: ["#D3D3D3"],
+  },
+];
 
 export default function LandingPage() {
-  const router = useRouter()
+  const router = useRouter();
+
   return (
-    <div className="min-h-screen flex flex-col bg-white">
+    <div className="min-h-screen flex flex-col bg-[#FAFAFA]">
       <main className="flex-grow">
-        <section className="bg-gradient-to-r from-purple-600 via-pink-500 to-yellow-400 text-white py-24">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center">
-              <h1 className="text-5xl sm:text-6xl md:text-7xl font-extrabold font-sansleading-tight mb-4">
-                Discover Your <span className="text-yellow-300">Unique Style</span>
-              </h1>
-              <p className="mt-6 max-w-lg mx-auto text-xl sm:text-2xl md:text-3xl text-white">
-                {`Elevate your wardrobe with Vestis Aura's curated collection.`}
-              </p>
-              <div className="mt-10 flex justify-center">
-                <Button className="bg-white text-purple-700 hover:bg-gray-100 text-lg px-8 py-3 rounded-full transition-all transform hover:scale-105" onClick={()=>{router.push('/products')}}>
+        <section className="h-screen relative overflow-hidden">
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            className="absolute inset-0 h-full w-full object-cover"
+          >
+            <source src="/videos/products_video.mp4" type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+          <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+            <div className="text-center px-4">
+              <motion.h1
+                className="text-7xl sm:text-8xl md:text-9xl font-extrabold font-sans leading-tight mb-8 text-white"
+                initial={{ opacity: 0, y: 50 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8 }}
+              >
+                VESTIS <span className="text-yellow-300">AURA</span>
+              </motion.h1>
+              <motion.p
+                className="mt-6 text-3xl sm:text-4xl md:text-5xl font-light text-white"
+                initial={{ opacity: 0, y: 50 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+              >
+                Elevate Your Style
+              </motion.p>
+              <motion.div
+                className="mt-12"
+                initial={{ opacity: 0, y: 50 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.4 }}
+              >
+                <Button
+                  className="bg-white text-black hover:bg-gray-200 text-2xl px-12 py-6 rounded-sm transition-all "
+                  onClick={() => {
+                    router.push("/products");
+                  }}
+                >
                   Explore Now
                 </Button>
-              </div>
+              </motion.div>
             </div>
           </div>
         </section>
 
         <section className="py-20 bg-white">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 className="text-3xl font-bold text-gray-900 text-center mb-12">
-              Featured Collections
-            </h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12">
-              {[1, 2, 3].map((item) => (
-                <div key={item} className="bg-white rounded-lg overflow-hidden shadow-md transition-all hover:shadow-lg">
-                  <Image
-                    src={`/images/dress1.jpg`}
-                    alt={`Featured product ${item}`}
-                    width={600}
-                    height={600}
-                    className="w-full h-[380px] object-cover"
-                  />
-                  <div className="p-6">
-                    <h3 className="text-xl font-semibold text-gray-900 mb-2">Trendsetter Collection</h3>
-                    <p className="text-gray-700 font-medium text-lg mb-4">$129.99</p>
-                    <Button variant="outline" className="w-full" onClick={()=>router.push(`/products`)}>
-                      View Collection
-                    </Button>
+          <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="flex justify-center space-x-8 mb-12 text-sm font-light">
+              <button className="border-b-2 border-black pb-1">WOMEN</button>
+              <button className="text-gray-500 hover:border-b-2 hover:border-black pb-1 transition-all">
+                MEN
+              </button>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+              {products.map((product) => (
+                <motion.div
+                  key={product.id}
+                  className="group cursor-pointer"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5 }}
+                  viewport={{ once: true }}
+                >
+                  <div className="relative mb-4">
+                    {product.soldOut && (
+                      <div className="absolute top-4 left-4 bg-white px-3 py-1 text-xs">
+                        SOLD OUT
+                      </div>
+                    )}
+                    <Image
+                      src={product.image}
+                      alt={product.name}
+                      width={600}
+                      height={800}
+                      className="w-full object-cover aspect-[3/4]"
+                    />
                   </div>
-                </div>
+                  <div className="space-y-2">
+                    <h3 className="text-sm font-light">{product.name}</h3>
+                    <p className="text-sm font-light">{product.price}</p>
+                    <div className="flex gap-2">
+                      {product.colors.map((color, index) => (
+                        <button
+                          key={index}
+                          className="w-4 h-4 rounded-full border border-gray-300"
+                          style={{ backgroundColor: color }}
+                          aria-label={`Select color ${index + 1}`}
+                        />
+                      ))}
+                    </div>
+                  </div>
+                </motion.div>
               ))}
             </div>
           </div>
         </section>
 
-        <section className="bg-gradient-to-b from-purple-50 to-pink-50 py-20">
+        <section className="py-32 bg-black text-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center">
-              <h2 className="text-3xl font-bold text-purple-800 mb-6">
+              <h2 className="text-5xl sm:text-6xl font-bold mb-8">
                 About Vestis Aura
               </h2>
-              <p className="max-w-2xl mx-auto text-lg text-gray-700 leading-relaxed">
-                We believe in the power of fashion to express individuality and boost confidence. Our carefully curated collection brings you the latest trends and timeless classics, ensuring you always look and feel your best.
+              <p className="max-w-3xl mx-auto text-2xl leading-relaxed mb-12">
+                We believe in the power of fashion to express individuality and
+                boost confidence. Our carefully curated collection brings you
+                the latest trends and timeless classics, ensuring you always
+                look and feel your best.
               </p>
-              <Button variant="outline" className="mt-8 text-lg px-8 py-3 rounded-full transition-all transform hover:scale-105 border-purple-300 text-purple-700 hover:bg-purple-100">
+              <Button
+                variant="outline"
+                className="text-2xl px-12 py-6 rounded-sm transition-all border-white text-black hover:bg-gray-200 hover:text-black"
+              >
                 Learn More
               </Button>
             </div>
           </div>
         </section>
 
-        <section className="py-20 bg-gradient-to-b from-pink-50 to-yellow-50">
+        <section className="py-32 bg-gradient-to-b from-gray-900 to-black text-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
-              <div className="text-center">
-                <div className="bg-purple-100 rounded-full p-4 inline-block mb-4">
-                  <ShoppingBag size={32} className="text-purple-600" />
-                </div>
-                <h3 className="text-xl font-semibold text-gray-900 mb-2">Curated Collections</h3>
-                <p className="text-gray-600">Handpicked styles for every occasion</p>
-              </div>
-              <div className="text-center">
-                <div className="bg-pink-100 rounded-full p-4 inline-block mb-4">
-                  <Info size={32} className="text-pink-600" />
-                </div>
-                <h3 className="text-xl font-semibold text-gray-900 mb-2">Expert Advice</h3>
-                <p className="text-gray-600">Personalized styling tips from our fashion experts</p>
-              </div>
-              <div className="text-center">
-                <div className="bg-yellow-100 rounded-full p-4 inline-block mb-4">
-                  <Mail size={32} className="text-yellow-600" />
-                </div>
-                <h3 className="text-xl font-semibold text-gray-900 mb-2">Easy Returns</h3>
-                <p className="text-gray-600">Hassle-free returns within 30 days</p>
-              </div>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-16">
+              {[
+                {
+                  icon: ShoppingBag,
+                  title: "Curated Collections",
+                  description: "Handpicked styles for every occasion",
+                },
+                {
+                  icon: Info,
+                  title: "Expert Advice",
+                  description:
+                    "Personalized styling tips from our fashion experts",
+                },
+                {
+                  icon: Mail,
+                  title: "Easy Returns",
+                  description: "Hassle-free returns within 30 days",
+                },
+              ].map((item, index) => (
+                <motion.div
+                  key={index}
+                  className="text-center"
+                  initial={{ opacity: 0, y: 50 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8, delay: index * 0.2 }}
+                >
+                  <div className="bg-white rounded-full p-6 inline-block mb-6">
+                    <item.icon size={48} className="text-black" />
+                  </div>
+                  <h3 className="text-3xl font-semibold mb-4">{item.title}</h3>
+                  <p className="text-xl text-gray-300">{item.description}</p>
+                </motion.div>
+              ))}
             </div>
           </div>
         </section>
       </main>
 
-      <footer className="bg-gray-50 text-gray-800 py-16">
+      <footer className="bg-black text-white py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
             <div>
-              <h3 className="text-2xl font-bold mb-4 text-purple-800">Vestis Aura</h3>
-              <p className="text-gray-600 mb-6">Stay stylish, stay unique</p>
-              <div className="flex space-x-4">
-                <a href="#" className="text-purple-600 hover:text-purple-800 transition-colors">
-                  <Instagram size={24} />
-                  <span className="sr-only">Instagram</span>
-                </a>
-                <a href="#" className="text-purple-600 hover:text-purple-800 transition-colors">
-                  <Twitter size={24} />
-                  <span className="sr-only">Twitter</span>
-                </a>
-                <a href="#" className="text-purple-600 hover:text-purple-800 transition-colors">
-                  <Facebook size={24} />
-                  <span className="sr-only">Facebook</span>
-                </a>
+              <h3 className="text-4xl font-bold mb-6">Vestis Aura</h3>
+              <p className="text-2xl text-gray-300 mb-8">
+                Stay stylish, stay unique
+              </p>
+              <div className="flex space-x-6">
+                {[Instagram, Twitter, Facebook].map((Icon, index) => (
+                  <a
+                    key={index}
+                    href="#"
+                    className="text-white hover:text-yellow-300 transition-colors"
+                  >
+                    <Icon size={36} />
+                    <span className="sr-only">Social Media</span>
+                  </a>
+                ))}
               </div>
             </div>
             <div>
-              <h4 className="text-xl font-semibold mb-4 text-purple-800">Subscribe to Our Newsletter</h4>
+              <h4 className="text-3xl font-semibold mb-6">
+                Subscribe to Our Newsletter
+              </h4>
               <form className="flex flex-col sm:flex-row gap-4">
                 <Input
                   type="email"
                   placeholder="Enter your email"
-                  className="flex-grow bg-white text-gray-800 placeholder-gray-500 border-purple-200 focus:border-purple-400"
+                  className="flex-grow bg-white text-black placeholder-gray-500 text-xl py-6 px-6 rounded-sm"
                 />
-                <Button type="submit" className="px-8 py-3 rounded-full transition-all transform hover:scale-105 bg-purple-600 text-white hover:bg-purple-700">
+                <Button
+                  type="submit"
+                  className="px-12 py-6 rounded-sm transition-all bg-white text-black hover:bg-gray-200 text-xl font-semibold"
+                >
                   Subscribe
                 </Button>
               </form>
             </div>
           </div>
-          <div className="mt-12 pt-8 border-t border-purple-100 text-center text-gray-600">            
+          <div className="mt-16 pt-8 border-t border-gray-800 text-center text-gray-400 text-xl">
             <p>&copy; 2023 Vestis Aura. All rights reserved.</p>
           </div>
         </div>
       </footer>
     </div>
-  )
+  );
 }
-
