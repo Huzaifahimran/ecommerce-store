@@ -4,10 +4,9 @@ import { Input } from "@/components/ui/input"
 import { Trash2 } from 'lucide-react'
 
 export default function Cart() {
-  // This would typically come from a state management solution or API
   const cartItems = [
-    { id: 1, name: "Classic White Tee", price: 29.99, quantity: 2, image: "/placeholder.svg" },
-    { id: 2, name: "Denim Jeans", price: 59.99, quantity: 1, image: "/placeholder.svg" },
+    { id: 1, name: "Khaddar Shirt", price: 29.99, quantity: 2, image: "/images/khaddar_shirt.jpg" },
+    { id: 2, name: "Tracksuit", price: 59.99, quantity: 1, image: "/images/tracksuit.jpg" },
   ]
 
   const subtotal = cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0)
@@ -15,7 +14,7 @@ export default function Cart() {
   const total = subtotal + shipping
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 p-7">
 
       <main className="">
         <h1 className="text-3xl font-bold text-gray-900 mb-8">Your Cart</h1>
@@ -30,7 +29,7 @@ export default function Cart() {
                   alt={item.name}
                   width={80}
                   height={80}
-                  className="rounded-md"
+                  className="rounded-md  border boder-gray-300"
                 />
                 <div className="ml-4 flex-grow">
                   <h3 className="text-lg font-semibold text-gray-900">{item.name}</h3>
@@ -41,6 +40,7 @@ export default function Cart() {
                     type="number"
                     min="1"
                     value={item.quantity}
+                    readOnly
                     className="w-16 mr-4"
                   />
                   <Button variant="ghost" size="icon">
@@ -68,7 +68,7 @@ export default function Cart() {
                   <span>${total.toFixed(2)}</span>
                 </div>
               </div>
-              <Button className="w-full bg-pink-600 text-white hover:bg-pink-700">
+              <Button className="w-full bg-white text-black hover:bg-gray-100 border border-gray-300 ">
                 Proceed to Checkout
               </Button>
             </div>

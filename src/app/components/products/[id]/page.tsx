@@ -1,5 +1,5 @@
 'use client'
-import { useRouter } from 'next/router';
+import React from 'react';
 import Image from 'next/image';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -23,17 +23,15 @@ interface Product {
   colors: string[];
 }
 
-export default function ProductDetail() {
-  const router = useRouter();
-  const { id } = router.query; // Get the dynamic ID from the URL
+export default function ProductDetail({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = React.use(params); 
 
-  // Simulating product data (replace with your actual data fetching logic)
   const product: Product = {
-    id: id as string, // Type assertion since id is a string
+    id,
     name: "Classic White Tee",
     price: 29.99,
     description: "Our classic white tee is a wardrobe essential. Made from 100% organic cotton, it's soft, breathable, and perfect for everyday wear. The versatile design pairs well with any outfit, making it a must-have for any fashion-conscious individual.",
-    images: ["/placeholder.svg", "/placeholder.svg", "/placeholder.svg", "/placeholder.svg"],
+    images: ["/images/cargo_trousers.jpg", "/images/cargo-trousers.webp", "/images/hoodie.webp", "/images/tracksuit.jpg"],
     sizes: ["XS", "S", "M", "L", "XL"],
     colors: ["White", "Black", "Gray"],
   };
@@ -51,7 +49,7 @@ export default function ProductDetail() {
                 alt={product.name}
                 width={600}
                 height={600}
-                className="w-full h-full object-center object-cover"
+                className="w-full h-64 object-contain"
               />
             </div>
             <div className="mt-4 grid grid-cols-4 gap-2">

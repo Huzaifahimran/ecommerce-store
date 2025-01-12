@@ -1,5 +1,5 @@
-'use client'
-import { useCallback, useEffect, useState } from "react";
+"use client";
+import React, { useCallback, useEffect, useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import {
@@ -9,49 +9,95 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Slider } from "@/components/ui/slider";
-import Image from 'next/image';
+import Image from "next/image";
+import MinimumDistanceSlider from "../elements/Slider";
 
 export default function ProductListings() {
   const initialProducts = [
-    { id: 1, name: "Classic White Tee", price: 29.99, image: "/images/white_tee.webp" },
-    { id: 2, name: "Cargo Trousers", price: 59.99, image: "/images/cargo-trousers.webp" },
-    { id: 3, name: "Essential Black Hoodie", price: 199.99, image: "/images/hoodie.webp" },
+    {
+      id: 1,
+      name: "Classic White Tee",
+      price: 29.99,
+      image: "/images/white_tee.webp",
+    },
+    {
+      id: 2,
+      name: "Cargo Trousers",
+      price: 59.99,
+      image: "/images/cargo-trousers.webp",
+    },
+    {
+      id: 3,
+      name: "Essential Black Hoodie",
+      price: 199.99,
+      image: "/images/hoodie.webp",
+    },
     { id: 4, name: "Summer Dress", price: 49.99, image: "/images/dress2.jpg" },
     { id: 5, name: "Valima Dress", price: 89.99, image: "/images/dress1.jpg" },
-    { id: 6, name: "Wool Sweater", price: 79.99, image: "/images/wool_sweater.jpg" },
+    {
+      id: 6,
+      name: "Wool Sweater",
+      price: 79.99,
+      image: "/images/wool_sweater.jpg",
+    },
   ];
-
   const [products, setProducts] = useState(initialProducts);
   const [loading, setLoading] = useState(false);
-  const [hasMore, setHasMore] = useState(true); 
-  const [page, setPage] = useState(1); 
+  const [hasMore, setHasMore] = useState(true);
+  const [page, setPage] = useState(1);
 
-  
-  const fetchMoreProducts = async () => {
+  const fetchMoreProducts = useCallback(async () => {
     setLoading(true);
     setTimeout(() => {
       const newProducts = [
-        { id: 7, name: "Classic White Tee", price: 29.99, image: "/images/white_tee.webp" },
-        { id: 8, name: "Cargo Trousers", price: 59.99, image: "/images/cargo-trousers.webp" },
-        { id: 9, name: "Essential Black Hoodie", price: 199.99, image: "/images/hoodie.webp" },
-        { id: 10, name: "Summer Dress", price: 49.99, image: "/images/dress2.jpg" },
-        { id: 11, name: "Valima Dress", price: 89.99, image: "/images/dress1.jpg" },
-        { id: 12, name: "Wool Sweater", price: 79.99, image: "/images/wool_sweater.jpg" },
+        {
+          id: 7,
+          name: "Classic White Tee",
+          price: 29.99,
+          image: "/images/white_tee.webp",
+        },
+        {
+          id: 8,
+          name: "Cargo Trousers",
+          price: 59.99,
+          image: "/images/cargo-trousers.webp",
+        },
+        {
+          id: 9,
+          name: "Essential Black Hoodie",
+          price: 199.99,
+          image: "/images/hoodie.webp",
+        },
+        {
+          id: 10,
+          name: "Summer Dress",
+          price: 49.99,
+          image: "/images/dress2.jpg",
+        },
+        {
+          id: 11,
+          name: "Valima Dress",
+          price: 89.99,
+          image: "/images/dress1.jpg",
+        },
+        {
+          id: 12,
+          name: "Wool Sweater",
+          price: 79.99,
+          image: "/images/wool_sweater.jpg",
+        },
       ];
 
       setProducts((prevProducts) => [...prevProducts, ...newProducts]);
       setPage((prevPage) => prevPage + 1);
       setLoading(false);
 
-      
       if (page >= 1) {
         setHasMore(false);
       }
     }, 1000);
-  };
+  }, [page]);
 
- 
   const handleScroll = useCallback(() => {
     if (loading || !hasMore) return;
 
@@ -64,11 +110,11 @@ export default function ProductListings() {
   }, [loading, hasMore, fetchMoreProducts]);
 
   useEffect(() => {
-    window.addEventListener('scroll', handleScroll);
-    
+    window.addEventListener("scroll", handleScroll);
+
     // Clean up the event listener on unmount
     return () => {
-      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener("scroll", handleScroll);
     };
   }, [handleScroll]);
 
@@ -78,17 +124,20 @@ export default function ProductListings() {
         <div className="flex items-center justify-between mb-12">
           <h1 className="text-4xl font-bold text-gray-900">Our Products</h1>
           <div className="flex items-center space-x-4">
-            <span className="text-sm text-gray-500">Showing {products.length} products</span>
+            <span className="text-sm text-gray-500">
+              Showing {products.length} products
+            </span>
           </div>
         </div>
 
         <div className="flex flex-col md:flex-row gap-8">
-
           <div className="w-full md:w-64 space-y-8">
             <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-100">
               <div className="space-y-6">
                 <div>
-                  <h2 className="text-lg font-semibold text-gray-900 mb-4">Filters</h2>
+                  <h2 className="text-lg font-semibold text-gray-900 mb-4">
+                    Filters
+                  </h2>
                   <Input
                     type="text"
                     placeholder="Search products"
@@ -111,14 +160,9 @@ export default function ProductListings() {
                   </Select>
                 </div>
                 <div>
-                  <h3 className="font-medium text-gray-900 mb-3">Price Range</h3>
-                  <Slider defaultValue={[0, 100]} max={200} step={1} className="my-4" />
-                  <div className="flex justify-between mt-2">
-                    <span className="text-sm text-gray-600">$0</span>
-                    <span className="text-sm text-gray-600">$200</span>
-                  </div>
+                  <MinimumDistanceSlider/>
                 </div>
-                <Button className="w-full bg-pink-600 text-white hover:bg-pink-700 transition-colors">
+                <Button className="w-full bg-white text-gray-900 hover:bg-gray-100 transition-colors rounded-sm border border-gray-300">
                   Apply Filters
                 </Button>
               </div>
@@ -143,9 +187,11 @@ export default function ProductListings() {
                     <div className="absolute inset-0 bg-black opacity-0 group-hover:opacity-10 transition-opacity duration-300" />
                   </div>
                   <div className="p-6">
-                    <h3 className="text-lg font-semibold text-gray-900 mb-2">{product.name}</h3>
-                    <p className="text-gray-600 mb-4">${product.price.toFixed(2)}</p>
-                    <Button className="w-full bg-pink-600 text-white hover:bg-pink-700 transition-colors">
+                    <h3 className="text-lg font-semibold text-gray-900 mb-2">
+                      {product.name}
+                    </h3>
+                    <p className="mb-4">${product.price.toFixed(2)}</p>
+                    <Button className="w-full bg-white text-black hover:bg-gray-100 transition-colors rounded-sm border border-gray-300">
                       Add to Cart
                     </Button>
                   </div>

@@ -11,11 +11,12 @@ import {
 } from "@/components/ui/select"
 import { Upload, X } from 'lucide-react'
 import Image from 'next/image'
+import React from "react"
 
-export default function EditProductPage({ params }: { params: { id: string } }) {
-  // This would typically come from your database based on the ID
+export default function EditProductPage({ params }: { params: Promise<{ id: string }> }) {
+  const { id }= React.use(params)
   const product = {
-    id: params.id,
+    id: id,
     name: "Classic White Tee",
     price: 29.99,
     category: "tops",
